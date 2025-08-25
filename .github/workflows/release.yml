@@ -1,0 +1,74 @@
+name: Release
+
+on:
+  push:
+    tags:
+      - 'v*'
+
+jobs:
+  release:
+    runs-on: ubuntu-latest
+    
+    permissions:
+      contents: write
+      id-token: write
+    
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v4
+    
+    - name: Setup Node.js
+      uses: actions/setup-node@v4
+      with:
+        node-version: '20.x'
+        cache: 'npm'
+        registry-url: 'https://registry.npmjs.org'
+    
+    - name: Install dependencies
+      run: npm ci
+    
+    - name: Run linting
+      run: npm run lint
+    
+    - name: Run tests
+      run: npm test
+    
+    - name: Build project
+      run: npm run build
+    
+    - name: Extract version from tag
+      id: version
+      run: echo "VERSION=${GITHUB_REF#refs/tags/v}" >> $GITHUB_OUTPUT
+    
+    - name: Extract changelog for version
+      id: changelog
+      run: |
+        # Extrai as notas da versão atual do CHANGELOG.md
+        VERSION="${{ steps.version.outputs.VERSION }}"
+        CHANGELOG_CONTENT=$(awk "/## \[$VERSION\]/{flag=1; next} /## \[/{flag=0} flag" CHANGELOG.md | sed '/^$/d' | head -20)
+        
+        if [ -z "$CHANGELOG_CONTENT" ]; then
+          CHANGELOG_CONTENT="- Veja o [CHANGELOG.md](CHANGELOG.md) para detalhes das mudanças"
+        fi
+        
+        # Salva o conteúdo em arquivo temporário para preservar quebras de linha
+        echo "$CHANGELOG_CONTENT" > /tmp/changelog.txt
+        echo "content<<EOF" >> $GITHUB_OUTPUT
+        cat /tmp/changelog.txt >> $GITHUB_OUTPUT
+        echo "EOF" >> $GITHUB_OUTPUT
+    
+    - name: Publish to NPM
+      run: npm publish --provenance --access public
+      env:
+        NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
+    
+    - name: Create GitHub Release
+      uses: actions/create-release@v1
+      env:
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      with:
+        tag_name: ${{ github.ref }}
+        release_name: "v${{ steps.version.outputs.VERSION }}"
+        body: ${{ steps.changelog.outputs.content }}
+        draft: false
+        prerelease: false

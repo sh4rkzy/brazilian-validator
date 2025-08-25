@@ -1,0 +1,49 @@
+{
+	"name": "brazilian-validator",
+	"version": "0.0.0",
+	"description": "A Brazilian document validator library for CPF validation with TypeScript support",
+	"main": "dist/index.js",
+	"types": "dist/index.d.ts",
+	"scripts": {
+		"build": "tsc",
+		"dev": "tsc --watch",
+		"test": "poku",
+		"lint": "biome check .",
+		"lint:fix": "biome check . --write",
+		"format": "biome format . --write",
+		"release:patch": "npm version patch && git push origin main --tags",
+		"release:minor": "npm version minor && git push origin main --tags",
+		"release:major": "npm version major && git push origin main --tags"
+	},
+	"repository": {
+		"type": "git",
+		"url": "https://github.com/sh4rkzy/brazilian-validator.git"
+	},
+	"homepage": "https://github.com/sh4rkzy/brazilian-validator#readme",
+	"bugs": {
+		"url": "https://github.com/sh4rkzy/brazilian-validator/issues"
+	},
+	"keywords": [
+		"cpf",
+		"brazilian",
+		"validator",
+		"document",
+		"typescript",
+		"brazil",
+		"validation"
+	],
+	"author": "sh4rkzy",
+	"license": "MIT",
+	"devDependencies": {
+		"@biomejs/biome": "2.2.2",
+		"@types/node": "^24.3.0",
+		"poku": "^3.0.2",
+		"tsx": "^4.20.5",
+		"typescript": "^5.9.2"
+	},
+	"dependencies": {
+		"class-transformer": "^0.5.1",
+		"class-validator": "^0.14.2",
+		"reflect-metadata": "^0.2.2"
+	}
+}

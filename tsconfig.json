@@ -1,0 +1,21 @@
+{
+	"compilerOptions": {
+		"module": "CommonJS",
+		"moduleResolution": "node",
+		"target": "ES2018",
+		"declaration": true,
+		"outDir": "./dist",
+		"removeComments": true,
+		"sourceMap": true,
+		"emitDecoratorMetadata": true,
+		"experimentalDecorators": true,
+		"esModuleInterop": true,
+		"allowSyntheticDefaultImports": true,
+		"strict": true,
+		"skipLibCheck": true,
+		"forceConsistentCasingInFileNames": true,
+		"incremental": true
+	},
+	"include": ["src"],
+	"exclude": ["node_modules", "dist", "**/*.spec.ts"]
+}

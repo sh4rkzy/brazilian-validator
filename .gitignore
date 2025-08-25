@@ -1,0 +1,9 @@
+# paste
+/dist
+/node_modules
+.vscode
+.idea
+
+## macOS
+.DS_Store
+
