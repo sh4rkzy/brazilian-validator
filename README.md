@@ -1,107 +1,56 @@
-# 🇧🇷 Brazilian Document Validator
+# 🇧🇷 Brazilian Validator
 
 <div align="center">
 
-[![npm version](https://badge.fury.io/js/brazilian-validator.svg)](https://badge.fury.io/js/brazilian-validator)
-[![npm downloads](https://img.shields.io/npm/dm/brazilian-validator.svg)](https://www.npmjs.com/package/brazilian-validator)
+[![npm version](https://badge.fury.io/js/@sh4rkzy%2Fbrazilian-validator.svg)](https://badge.fury.io/js/@sh4rkzy%2Fbrazilian-validator)
+[![npm downloads](https://img.shields.io/npm/dm/@sh4rkzy/brazilian-validator.svg)](https://www.npmjs.com/package/@sh4rkzy/brazilian-validator)
 [![GitHub Workflow Status](https://img.shields.io/github/actions/workflow/status/sh4rkzy/brazilian-validator/ci.yml?branch=main&label=tests)](https://github.com/sh4rkzy/brazilian-validator/actions)
 [![TypeScript](https://img.shields.io/badge/TypeScript-5.9.2-blue?logo=typescript)](https://www.typescriptlang.org/)
 [![Poku](https://img.shields.io/badge/Poku-3.0.2-green?logo=nodejs)](https://poku.io/)
 [![Biome](https://img.shields.io/badge/Biome-2.2.2-purple?logo=biome)](https://biomejs.dev/)
-
 [![Coverage Status](https://img.shields.io/badge/coverage-100%25-brightgreen)](https://github.com/sh4rkzy/brazilian-validator)
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 [![Node.js](https://img.shields.io/badge/Node.js-%3E%3D16.0.0-green?logo=node.js)](https://nodejs.org/)
-[![Bundle Size](https://img.shields.io/bundlephobia/minzip/brazilian-validator)](https://bundlephobia.com/package/brazilian-validator)
-[![Tree Shaking](https://img.shields.io/badge/tree%20shaking-supported-brightgreen)](https://webpack.js.org/guides/tree-shaking/)
 [![ESM](https://img.shields.io/badge/ESM-supported-brightgreen)](https://nodejs.org/api/esm.html)
-
-[![Zero Dependencies](https://img.shields.io/badge/dependencies-zero-brightgreen)](https://www.npmjs.com/package/brazilian-validator)
 [![NestJS](https://img.shields.io/badge/NestJS-compatible-red?logo=nestjs)](https://nestjs.com/)
 [![GitHub Stars](https://img.shields.io/github/stars/sh4rkzy/brazilian-validator?style=social)](https://github.com/sh4rkzy/brazilian-validator)
 
-**Um validador de documentos brasileiros (CPF e CNPJ) com decorators para TypeScript/NestJS**
+  🚀 Valide documentos brasileiros (CPF e CNPJ) no **NestJS/TypeScript** de forma simples, nativa e sem dependências extras.  
 
-[Funcionalidades](#funcionalidades) •
-[Instalação](#instalação) •
-[Uso](#uso) •
-[API](#api) •
-[Testes](#testes) •
-[Contribuir](#contribuindo)
-
+  [Instalação](#📦-instalação) •
+  [Uso no TypeScript](#🟦-uso-no-typescript) •
+  [Exemplos no NestJS](#🛠️-exemplos-no-nestjs) •
+  [API e Decorators](#🎯-api-e-decorators) •
+  [Testes](#🧪-testes) •
+  [Roadmap](#🛣️-roadmap) •
+  [Contribuindo](#🤝-contribuindo) •
+  [Contribuindo](#🤝-contribuindo)
 </div>
 
-## 📊 Status do Projeto
+---
 
-<table>
-<tr>
-<td width="33%">
-
-**🚀 Build & Release**
-- ![Build Status](https://img.shields.io/badge/build-passing-brightgreen)
-- ![Tests](https://img.shields.io/badge/tests-28%20passing-brightgreen)
-- ![Version](https://img.shields.io/badge/version-v1.0.0-blue)
-- ![Stability](https://img.shields.io/badge/stability-stable-green)
-
-</td>
-<td width="33%">
-
-**🧪 Qualidade & Cobertura**
-- ![Coverage](https://img.shields.io/badge/coverage-100%25-brightgreen)
-- ![Code Quality](https://img.shields.io/badge/code%20quality-A+-brightgreen)
-- ![Security](https://img.shields.io/badge/security-no%20vulnerabilities-brightgreen)
-- ![Maintainability](https://img.shields.io/badge/maintainability-A-brightgreen)
-
-</td>
-<td width="33%">
-
-**⚡ Performance & Tamanho**
-- ![Bundle Size](https://img.shields.io/badge/bundle%20size-%3C%205KB-brightgreen)
-- ![Gzip Size](https://img.shields.io/badge/gzip%20size-%3C%202KB-brightgreen)
-- ![Dependencies](https://img.shields.io/badge/dependencies-0-brightgreen)
-- ![Tree Shaking](https://img.shields.io/badge/tree%20shaking-✓-brightgreen)
-
-</td>
-</tr>
-</table>
-
-### 🏆 Métricas de Desenvolvimento
-
-| Métrica | Valor | Status |
-|---------|-------|--------|
-| **Testes Unitários** | 20+ casos | ![✅](https://img.shields.io/badge/-✅-brightgreen) |
-| **Testes de Integração** | 8+ casos | ![✅](https://img.shields.io/badge/-✅-brightgreen) |
-| **Cobertura de Código** | 100% | ![✅](https://img.shields.io/badge/-✅-brightgreen) |
-| **Performance** | < 1ms/validação | ![✅](https://img.shields.io/badge/-✅-brightgreen) |
-| **Compatibilidade** | Node 16+ | ![✅](https://img.shields.io/badge/-✅-brightgreen) |
-| **TypeScript** | Strict Mode | ![✅](https://img.shields.io/badge/-✅-brightgreen) |
-
-## Instalação
+## 📦 Instalação
 
 ```bash
-npm install brazilian-validator
+npm install @sh4rkzy/brazilian-validator class-validator class-transformer
 ```
 
-## Uso
+ou
 
-### Validação Simples
-
-```typescript
-import { validateCpfDigit, validateCnpjDigit } from 'brazilian-validator';
-
-// Validar CPF
-const isValidCpf = validateCpfDigit('111.444.777-35'); // true
-const isInvalidCpf = validateCpfDigit('111.444.777-36'); // false
-
-// Validar CNPJ
-const isValidCnpj = validateCnpjDigit('11.222.333/0001-81'); // true
-const isInvalidCnpj = validateCnpjDigit('11.222.333/0001-82'); // false
+```bash
+yarn add @sh4rkzy/brazilian-validator class-validator class-transformer
 ```
 
-### Usando Decorators
+---
+
+## 🟦 Uso no TypeScript
+
+A biblioteca é **totalmente compatível com TypeScript** e pode ser usada sem NestJS.
 
 ```typescript
-import { IsCPF, IsCNPJ, validateBrazilianDocs } from 'brazilian-validator';
+import 'reflect-metadata';
+import { validate } from 'class-validator';
+import { IsCPF, IsCNPJ } from '@sh4rkzy/brazilian-validator';
 
 class User {
   @IsCPF({ message: 'CPF inválido' })
@@ -111,149 +60,129 @@ class User {
   cnpj!: string;
 }
 
-const user = new User();
-user.cpf = '111.444.777-35';
-user.cnpj = '11.222.333/0001-81';
+async function run() {
+  const user = new User();
+  user.cpf = '12345678900'; // inválido
+  user.cnpj = '11222333000181'; // válido
 
-const errors = validateBrazilianDocs(user);
-console.log(errors); // []
+  const errors = await validate(user);
+  console.log(errors);
+}
+
+run();
 ```
 
-### Opções dos Decorators
+Também é possível usar funções utilitárias diretamente:
+
+```typescript
+import { validateCpfDigit, validateCnpjDigit } from '@sh4rkzy/brazilian-validator';
+
+console.log(validateCpfDigit('111.444.777-35')); // true
+console.log(validateCnpjDigit('11.222.333/0001-81')); // true
+```
+
+---
+
+## 🛠️ Exemplos no NestJS
+
+### DTO de criação de usuário
+```typescript
+import { IsCPF } from '@sh4rkzy/brazilian-validator';
+import { Body, Controller, Post } from '@nestjs/common';
+
+class CreateUserDto {
+  @IsCPF()
+  cpf!: string;
+}
+
+@Controller('users')
+export class UsersController {
+  @Post()
+  create(@Body() body: CreateUserDto) {
+    return body;
+  }
+}
+```
+
+### Configurando ValidationPipe no main.ts
+```typescript
+import { ValidationPipe } from '@nestjs/common';
+import { NestFactory } from '@nestjs/core';
+import { AppModule } from './app.module';
+
+async function bootstrap() {
+  const app = await NestFactory.create(AppModule);
+  app.useGlobalPipes(new ValidationPipe());
+  await app.listen(3000);
+}
+bootstrap();
+```
+
+---
+
+## 🎯 API e Decorators
+
+### Funções utilitárias
+- `validateCpfDigit(cpf: string): boolean`
+- `validateCnpjDigit(cnpj: string): boolean`
+
+### Decorators disponíveis
+- `@IsCPF(options?)`
+- `@IsCNPJ(options?)`
+
+Opções dos decorators:
 
 ```typescript
 class Company {
-  // Validação completa (padrão)
   @IsCPF()
   responsibleCpf!: string;
 
-  // Validação apenas de tamanho
   @IsCPF({ lengthOnly: true })
   backupCpf!: string;
 
-  // Mensagem personalizada
-  @IsCNPJ({ message: 'CNPJ da empresa é obrigatório' })
+  @IsCNPJ({ message: 'CNPJ da empresa inválido' })
   companyCnpj!: string;
 }
 ```
 
-## Estrutura do Projeto
+---
 
-```
-src/
-├── index.ts                              # Exportações principais
-├── module/
-│   └── validator/
-│       ├── validator-document.ts         # Função principal de validação
-│       ├── decorator/
-│       │   └── decorators.ts            # Decorators @IsCPF e @IsCNPJ
-│       └── interfaces/
-│           └── validator-options.interface.ts # Interface de opções
-└── shared/
-    └── utilities/
-        └── validator-digit.utilities.ts  # Funções de validação de dígitos
+## 🧪 Testes
 
-tests/
-├── shared/
-│   └── utilities/
-│       └── validator-digit.utilities.test.ts
-├── module/
-│   └── validator/
-│       ├── validator-document.test.ts
-│       └── decorator/
-│           └── decorators.test.ts
-├── integration.test.ts
-└── simple.test.ts
-```
+Este projeto possui **100% de cobertura de testes** com Poku.
 
-## Scripts Disponíveis
-
-- `npm test` - Executa todos os testes
-- `npm run test:watch` - Executa testes em modo watch
-- `npm run build` - Compila o projeto TypeScript
-- `npm run lint` - Verifica código com Biome
-- `npm run lint:fix` - Corrige problemas de lint automaticamente
-
-## Testes
-
-O projeto utiliza **Poku** como framework de testes, fornecendo:
-
-### Testes de Unidade
-- **Funções de validação**: Testa `validateDigit`, `validateCpfDigit`, `validateCnpjDigit`
-- **Decorators**: Testa `@IsCPF` e `@IsCNPJ`
-- **Validação de documentos**: Testa `validateBrazilianDocs`
-
-### Testes de Integração
-- Validação completa de objetos com múltiplos decorators
-- Cenários de uso real com diferentes formatos
-- Casos extremos e edge cases
-
-### Casos de Teste Cobertos
-
-#### CPF
-- ✅ CPFs válidos com e sem formatação
-- ✅ CPFs inválidos (dígitos verificadores incorretos)
-- ✅ CPFs com todos os dígitos iguais
-- ✅ CPFs com tamanho incorreto
-- ✅ CPFs com caracteres inválidos
-
-#### CNPJ
-- ✅ CNPJs válidos com e sem formatação
-- ✅ CNPJs inválidos (dígitos verificadores incorretos)
-- ✅ CNPJs com todos os dígitos iguais
-- ✅ CNPJs com tamanho incorreto
-- ✅ CNPJs com caracteres inválidos
-
-### Executar Testes
-
+### Executar testes
 ```bash
-# Todos os testes
 npm test
-
-# Testes em modo watch
-npm run test:watch
-
-# Teste específico
-npx tsx tests/shared/utilities/validator-digit.utilities.test.ts
 ```
 
-## Algoritmos de Validação
+### Executar testes em modo watch
+```bash
+npm run test:watch
+```
 
-### CPF (Cadastro de Pessoas Físicas)
-O algoritmo valida:
-1. Tamanho (11 dígitos)
-2. Sequências de dígitos iguais (rejeitadas)
-3. Primeiro dígito verificador
-4. Segundo dígito verificador
+### Executar linting
+```bash
+npm run lint
+```
 
-### CNPJ (Cadastro Nacional da Pessoa Jurídica)
-O algoritmo valida:
-1. Tamanho (14 dígitos)
-2. Sequências de dígitos iguais (rejeitadas)
-3. Primeiro dígito verificador
-4. Segundo dígito verificador
+---
 
-## 🛣️ Roadmap
+## 🤝 Contribuindo
 
-- [x] ✅ **v1.0.0** - Core CPF/CNPJ validation
-- [x] ✅ **v1.0.0** - TypeScript decorators
-- [x] ✅ **v1.0.0** - Complete test suite
-- [ ] 🔄 **v1.1.0** - RG (Registro Geral) validation
-- [ ] 🔄 **v1.2.0** - CEP validation
-- [ ] 🔄 **v1.3.0** - Título de Eleitor validation
-- [ ] 🔄 **v2.0.0** - Class-validator integration
-- [ ] 🔄 **v2.1.0** - React Hook Form integration
+Contribuições são bem-vindas! Veja como contribuir:
 
-## 🤝 Contributing
+1. **Fork** o projeto
+2. Crie uma **branch** para sua feature (`git checkout -b feature/AmazingFeature`)
+3. **Commit** suas mudanças (`git commit -m 'Add some AmazingFeature'`)
+4. **Push** para a branch (`git push origin feature/AmazingFeature`)
+5. Abra um **Pull Request**
 
-Contribuições são bem-vindas! Por favor, leia o [guia de contribuição](CONTRIBUTING.md) antes de submeter um PR.
-
-### Development Setup
+### Desenvolvimento local
 
 ```bash
 # Clone o repositório
-git clone https://github.com/kauecampos/brazilian-validator.git
-cd brazilian-validator
+git clone https://github.com/sh4rkzy/brazilian-validator.git
 
 # Instale as dependências
 npm install
@@ -261,64 +190,40 @@ npm install
 # Execute os testes
 npm test
 
-# Execute o linter
-npm run lint
-
-# Build do projeto
+# Execute o build
 npm run build
 ```
 
-### Commit Convention
+---
 
-Este projeto segue [Conventional Commits](https://www.conventionalcommits.org/):
+## 🛣️ Roadmap
 
-```bash
-feat: adiciona validação de RG
-fix: corrige validação de CNPJ com zeros à esquerda
-docs: atualiza README com exemplos
-test: adiciona testes para edge cases
-```
+- [x] ✅ **v0.0.1** - Core CPF/CNPJ validation
+- [x] ✅ **v0.0.2** - TypeScript decorators
+- [x] ✅ **v0.0.4** - Complete test suite
+- [ ] 🔄 **v0.1.0** - RG validation
+- [ ] 🔄 **v0.2.0** - CEP validation
+- [ ] 🔄 **v0.3.0** - Título de Eleitor validation
+- [ ] 🔄 **v0.4.0** - React Hook Form integration
 
-## 📝 Changelog
+---
 
-### [1.0.0] - 2024-01-XX
-- ✨ Initial release
-- ✅ CPF validation with official algorithm
-- ✅ CNPJ validation with official algorithm
-- ✅ TypeScript decorators (@IsCPF, @IsCNPJ)
-- ✅ 100% test coverage (28+ test cases)
-- ✅ Zero dependencies
-- ✅ ESM and CommonJS support
-
-## 📄 Licença
 
 ## 📄 Licença
 
 Este projeto está licenciado sob a Licença MIT - veja o arquivo [LICENSE](LICENSE) para detalhes.
 
-## 👨‍💻 Autor
+---
 
-**Kaue Campos**
-- GitHub: [@sh4rkzy](https://github.com/sh4rkzy)
-- Email: kauecampos01@hotmail.com
+## 🔗 Links Úteis
 
-## 🙏 Agradecimentos
+- [📦 NPM Package](https://www.npmjs.com/package/@sh4rkzy/brazilian-validator)
 
-- [Poku](https://poku.io/) - Framework de testes moderno
-- [Biome](https://biomejs.dev/) - Toolchain rápida para linting
-- [TypeScript](https://www.typescriptlang.org/) - Tipagem estática
 
 ## 📞 Suporte
 
 - 🐛 **Issues**: [GitHub Issues](https://github.com/sh4rkzy/brazilian-validator/issues)
 - 💬 **Discussões**: [GitHub Discussions](https://github.com/sh4rkzy/brazilian-validator/discussions)
-- 📧 **Email**: kauecampos01@hotmail.com
-
-## 🔗 Links Úteis
-
-- [📦 NPM Package](https://www.npmjs.com/package/brazilian-validator)
-
----
 
 <div align="center">
 
@@ -326,6 +231,6 @@ Este projeto está licenciado sob a Licença MIT - veja o arquivo [LICENSE](LICE
 
 ⭐ Se este projeto foi útil, considere dar uma estrela no GitHub!
 
-[⬆ Voltar ao topo](#-brazilian-document-validator)
+[Kaue Campos - Software Engineer](https://github.com/sh4rkzy)
 
 </div>
