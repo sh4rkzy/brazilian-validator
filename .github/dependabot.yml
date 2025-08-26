@@ -12,7 +12,21 @@ updates:
     commit-message:
       prefix: "chore"
       include: "scope"
-
+    # Agrupa updates de dependências relacionadas
+    groups:
+      dev-dependencies:
+        patterns:
+          - "@types/*"
+          - "biomejs*"
+        update-types:
+          - "minor"
+          - "patch"
+      production-dependencies:
+        patterns:
+          - "*"
+        exclude-patterns:
+          - "@types/*"
+          - "biomejs*"
   - package-ecosystem: "github-actions"
     directory: "/"
     schedule:
@@ -25,3 +39,8 @@ updates:
     commit-message:
       prefix: "ci"
       include: "scope"
+    # Agrupa updates de actions relacionadas
+    groups:
+      github-actions:
+        patterns:
+          - "*"

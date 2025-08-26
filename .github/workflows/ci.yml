@@ -7,8 +7,87 @@ on:
     branches: [ main ]
 
 jobs:
+  install:
+    runs-on: ubuntu-latest
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v4
+    
+    - name: Setup Node.js
+      uses: actions/setup-node@v4
+      with:
+        node-version: '20.x'
+        cache: 'npm'
+    
+    - name: Install dependencies
+      run: npm ci
+    
+    - name: Cache dependencies
+      uses: actions/cache@v3
+      with:
+        path: node_modules
+        key: ${{ runner.os }}-node-${{ hashFiles('**/package-lock.json') }}
+
+  lint:
+    runs-on: ubuntu-latest
+    needs: install
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v4
+    
+    - name: Setup Node.js
+      uses: actions/setup-node@v4
+      with:
+        node-version: '20.x'
+        cache: 'npm'
+    
+    - name: Restore dependencies
+      uses: actions/cache@v3
+      with:
+        path: node_modules
+        key: ${{ runner.os }}-node-${{ hashFiles('**/package-lock.json') }}
+    
+    - name: Install dependencies
+      run: npm ci
+    
+    - name: Run linting
+      run: npm run lint
+
+  build:
+    runs-on: ubuntu-latest
+    needs: lint
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v4
+    
+    - name: Setup Node.js
+      uses: actions/setup-node@v4
+      with:
+        node-version: '20.x'
+        cache: 'npm'
+    
+    - name: Restore dependencies
+      uses: actions/cache@v3
+      with:
+        path: node_modules
+        key: ${{ runner.os }}-node-${{ hashFiles('**/package-lock.json') }}
+    
+    - name: Install dependencies
+      run: npm ci
+    
+    - name: Build project
+      run: npm run build
+    
+    - name: Upload build artifacts
+      uses: actions/upload-artifact@v4
+      with:
+        name: build-artifacts
+        path: dist/
+        retention-days: 7
+
   test:
     runs-on: ubuntu-latest
+    needs: build
     
     strategy:
       matrix:
@@ -27,11 +106,11 @@ jobs:
     - name: Install dependencies
       run: npm ci
     
-    - name: Run linting
-      run: npm run lint
-    
-    - name: Build project
-      run: npm run build
+    - name: Download build artifacts
+      uses: actions/download-artifact@v4
+      with:
+        name: build-artifacts
+        path: dist/
     
     - name: Run tests
       run: npm test
@@ -41,7 +120,5 @@ jobs:
       uses: actions/upload-artifact@v4
       with:
         name: test-results
-        path: |
-          dist/
-          coverage/
+        path: coverage/
         retention-days: 7
