@@ -29,7 +29,7 @@
 
 ---
 
-## 📦 Instalação
+## 📦 Instalação 
 
 ```bash
 npm install @sh4rkzy/brazilian-validator class-validator class-transformer
