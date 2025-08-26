@@ -18,7 +18,7 @@ export function IsCPF(options?: ValidatorOptionsCustom) {
 			options,
 			validator: {
 				validate(value: any) {
-					if (!value) return true; // opcional
+					if (!value) return true;
 					const onlyDigits = value.replace(/\D/g, '');
 					return options?.lengthOnly
 						? onlyDigits.length === 11
@@ -44,7 +44,7 @@ export function IsCNPJ(options?: ValidatorOptionsCustom) {
 			options,
 			validator: {
 				validate(value: any) {
-					if (!value) return true; // opcional
+					if (!value) return true;
 					const onlyDigits = value.replace(/\D/g, '');
 					return options?.lengthOnly
 						? onlyDigits.length === 14
