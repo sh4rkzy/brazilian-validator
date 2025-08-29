@@ -3,6 +3,7 @@
 /node_modules
 .vscode
 .idea
+coverage
 
 ## macOS
 .DS_Store

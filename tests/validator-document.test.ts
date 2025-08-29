@@ -1,10 +1,10 @@
-import { validateBrazilianDocs, IsCPF, IsCNPJ } from '../validator-document';
+import { validateBrazilianDocs, IsCPF, IsCNPJ } from '../src/module/validators/validator-document';
 import {
   documentosValidos,
   documentosInvalidos,
   casosTesteValidacaoMista,
   formatosDocumentos,
-} from './validator-document.mock';
+} from './mocks/validator-document.mock';
 import { validate } from 'class-validator';
 import 'reflect-metadata';
 

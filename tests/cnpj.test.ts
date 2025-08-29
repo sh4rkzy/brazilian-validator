@@ -1,12 +1,12 @@
-import { validateCnpjDigit } from '../cnpj.validator';
-import { IsCNPJ } from '../cnpj.decorator';
-import { CNPJOptions } from '../cnpj.types';
+import { validateCnpjDigit } from '../src/module/validators/cnpj/cnpj.validator';
+import { IsCNPJ } from '../src/module/validators/cnpj/cnpj.decorator';
+import { CNPJOptions } from '../src/module/validators/cnpj/cnpj.types';
 import {
   cnpjsValidos,
   cnpjsInvalidos,
   cnpjComCaracteresEspeciais,
   opcoesMockCNPJ,
-} from './cnpj.mock';
+} from './mocks/cnpj.mock';
 import { validate } from 'class-validator';
 import 'reflect-metadata';
 

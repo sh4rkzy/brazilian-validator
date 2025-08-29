@@ -1,12 +1,11 @@
-import { validateCpfDigit } from '../cpf.validator';
-import { IsCPF } from '../cpf.decorator';
-import { CPFOptions } from '../cpf.types';
+import { validateCpfDigit } from '../src/module/validators/cpf/cpf.validator';
+import { IsCPF } from '../src/module/validators/cpf/cpf.decorator';
 import {
   cpfsValidos,
   cpfsInvalidos,
   cpfComCaracteresEspeciais,
   opcoesMockCPF,
-} from './cpf.mock';
+} from './mocks/cpf.mock';
 import { validate } from 'class-validator';
 import 'reflect-metadata';
 

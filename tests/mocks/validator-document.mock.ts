@@ -1,5 +1,5 @@
-import { IsCPF } from '../cpf/cpf.decorator';
-import { IsCNPJ } from '../cnpj/cnpj.decorator';
+import { IsCPF } from '../../src/module/validators/cpf/cpf.decorator';
+import { IsCNPJ } from '../../src/module/validators/cnpj/cnpj.decorator';
 
 export const documentosValidos = {
   cpfs: [
