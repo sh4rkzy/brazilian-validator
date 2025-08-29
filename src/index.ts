@@ -1,3 +1,9 @@
-export * from './module/validator/validator-document';
-export * from './module/validator/interfaces/validator-options.interface';
-export * from './shared/utilities/validator-digit.utilities';
+export {
+	IsCPF,
+	IsCNPJ,
+	validateBrazilianDocs,
+} from './module/validators/validator-document';
+
+export type { CPFOptions } from './module/validators/cpf/cpf.types';
+
+export type { CNPJOptions } from './module/validators/cnpj/cnpj.types';
