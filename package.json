@@ -41,7 +41,7 @@
 		"CHANGELOG.md"
 	],
 	"devDependencies": {
-		"@biomejs/biome": "2.2.2",
+		"@biomejs/biome": "2.2.3",
 		"@types/node": "^24.3.0",
 		"poku": "^3.0.2",
 		"tsx": "^4.20.5",
