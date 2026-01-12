@@ -42,7 +42,7 @@
 	],
 	"devDependencies": {
 		"@biomejs/biome": "2.2.3",
-		"@types/node": "^24.3.0",
+		"@types/node": "^25.0.6",
 		"poku": "^3.0.2",
 		"tsx": "^4.20.5",
 		"typescript": "^5.9.2"
